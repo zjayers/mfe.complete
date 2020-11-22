@@ -3,7 +3,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const packageJSON = require("../package.json");
 const commonConfig = require("./webpack.common");
 
-const DEV_PORT = 8080;
+const DEV_PORT = 8082;
 
 const devConfig = {
   mode: "development",
@@ -18,11 +18,10 @@ const devConfig = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "containerModule",
-      remotes: {
-        marketingModule: "marketingModule@http://localhost:8081/remoteEntry.js",
-        authModule: "authModule@http://localhost:8082/remoteEntry.js",
-        dashboardModule: "dashboardModule@http://localhost:8083/remoteEntry.js",
+      name: "authModule",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./AuthBootstrapper": "./src/bootstrap-app",
       },
       shared: packageJSON.dependencies,
     }),

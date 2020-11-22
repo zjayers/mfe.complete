@@ -3,10 +3,15 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const packageJSON = require("../package.json");
 const commonConfig = require("./webpack.common");
 
+const DEV_PORT = 8081;
+
 const devConfig = {
   mode: "development",
+  output: {
+    publicPath: `http://localhost:${DEV_PORT}/`,
+  },
   devServer: {
-    port: 8081,
+    port: DEV_PORT,
     historyApiFallback: {
       index: "index.html",
     },

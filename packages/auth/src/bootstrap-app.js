@@ -5,7 +5,7 @@ import App from "./app";
 
 const mount = (
   htmlElementId,
-  { onChildNavigate, useBrowserHistory, initialPath }
+  { onChildNavigate, onSignIn, useBrowserHistory, initialPath }
 ) => {
   const history = useBrowserHistory
     ? createBrowserHistory()
@@ -18,7 +18,7 @@ const mount = (
   }
 
   ReactDOM.render(
-    <App history={history} />,
+    <App history={history} onSignIn={onSignIn} />,
     document.getElementById(htmlElementId)
   );
 
